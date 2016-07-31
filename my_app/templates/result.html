@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div align="center"><form action="" method="post">
+    {{ shortener.as_p }}
+    <input type="submit" value="Short my url"><br>
+</form>
+{% if shortUrl %}
+    <p>Ваша ссылка уже существует</p>
+    <a href="{{ shortUrl.short_url }}" target="_blank">{{ shortUrl.short_url }}</a>
+{% elif new_shortUrl %}
+    <p>Ваша сокращенная ссылка</p>
+    <a href="{{ new_shortUrl.short_url }}" target="_blank">{{ new_shortUrl.short_url }}</a>
+{% endif %}
+</div>
+
+<h3 align="center">Таблица ссылок</h3>
+
+<table bgcolor="#f0f8ff" border="1" align="center">
+<tr>
+    <th>
+        Оригинальная ссылка
+    </th>
+    <th>
+        Короткая ссылка
+    </th>
+    <th>
+        Дата создания
+    </th>
+    <th>
+        Количество кликов
+    </th>
+</tr>
+    {% for link in links %}
+    <tr>
+        <td>
+            <a href="{{ link.original_url }}" target="_blank">{{ link.original_url }}</a>
+        </td>
+        <td>
+            <a href="{{ link.short_url }}" target="_blank">{{ link.short_url }}</a>
+        </td>
+        <td>
+            {{ link.date }}
+        </td>
+        <td>
+            {{ link.clicks }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
